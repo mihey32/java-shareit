@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     public UserDto update(Long userId, UpdateUserRequest request) {
 
         if (userStorage.isUserWithEmailExist(request.getEmail())) {
-            throw new DuplicatedDataException("Этот E-mail "+ request.getEmail() + " уже используется");
+            throw new DuplicatedDataException("Этот E-mail " + request.getEmail() + " уже используется");
         }
 
         User updatedUser = UserMapper.updateUserFields(userStorage.findUser(userId), request);
