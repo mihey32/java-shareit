@@ -2,8 +2,10 @@ package ru.practicum.shareit.item.model;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(of = {"id"})
 public class Item {
     private Long id;
     @NotBlank(message = "Название не должно быть пустым")

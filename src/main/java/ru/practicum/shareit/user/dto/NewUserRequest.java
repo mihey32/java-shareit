@@ -1,12 +1,13 @@
-package ru.practicum.shareit.user;
+package ru.practicum.shareit.user.dto;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(of = {"id"})
-public class User {
+public class NewUserRequest {
     private Long id;
     @NotBlank(message = "E-mail должен быть указан")
     @Email(message = "Email должен быть в формате user@yandex.ru")
