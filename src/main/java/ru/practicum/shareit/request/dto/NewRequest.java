@@ -1,12 +1,16 @@
-package ru.practicum.shareit.request;
+package ru.practicum.shareit.request.dto;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
 @Data
-public class ItemRequest {
+@EqualsAndHashCode(of = {"id"})
+public class NewRequest {
     private Long id;
     @NotBlank(message = "Запрос не должен быть пустым")
     private String description;
