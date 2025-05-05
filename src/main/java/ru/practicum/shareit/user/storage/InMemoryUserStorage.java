@@ -13,6 +13,7 @@ import java.util.Optional;
 public class InMemoryUserStorage implements UserStorage {
 
     private final Map<Long, User> users = new HashMap<>();
+
     @Override
     public User updateUser(User updateUser) {
         //log.trace("Данные пользователя {} обновлены!", newUser.getName());
