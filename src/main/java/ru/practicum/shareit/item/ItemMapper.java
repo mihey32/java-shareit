@@ -18,6 +18,7 @@ public class ItemMapper {
 
         return dto;
     }
+
     public static Item mapToItem(Long ownerId, NewItemRequest request) {
         Item item = new Item();
         item.setName(request.getName());

@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
         this.userStorage = userStorage;
     }
 
-
     @Override
     public UserDto create(NewUserRequest request) {
         if (userStorage.isUserWithEmailExist(request.getEmail())) {
@@ -48,9 +47,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto update(Long userId, UpdateUserRequest request) {
-        /*if (userId == null) {
-            throw new ValidationException("ID пользователя должен быть указан");
-        }*/
 
         if (userStorage.isUserWithEmailExist(request.getEmail())) {
             throw new DuplicatedDataException("Этот E-mail "+ request.getEmail() + " уже используется");
