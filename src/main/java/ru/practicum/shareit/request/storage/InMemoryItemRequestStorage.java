@@ -1,6 +1,6 @@
 package ru.practicum.shareit.request.storage;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.request.ItemRequest;
 
@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Component
+@Repository
 public class InMemoryItemRequestStorage implements ItemRequestStorage {
-    Map<Long, ItemRequest> itemRequests = new HashMap<>();
+    private Map<Long, ItemRequest> itemRequests = new HashMap<>();
 
     @Override
     public ItemRequest create(ItemRequest request) {

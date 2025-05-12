@@ -1,6 +1,6 @@
 package ru.practicum.shareit.booking.storage;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.practicum.shareit.booking.Booking;
 import ru.practicum.shareit.exception.NotFoundException;
 
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Component
+@Repository
 public class InMemoryBookingStorage implements BookingStorage {
     Map<Long, Booking> bookings = new HashMap<>();
 

@@ -17,5 +17,5 @@ public class Item {
     @Positive(message = "ID владельца вещи не может быть отрицательным числом")
     private Long ownerId;
     @Positive(message = "ID запроса на создание вещи не может быть отрицательным числом")
-    Long requestId;
+    private Long requestId;
 }

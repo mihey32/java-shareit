@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
-    BookingStorage bookingStorage;
+    private BookingStorage bookingStorage;
 
     @Autowired
     public BookingServiceImpl(BookingStorage bookingStorage) {

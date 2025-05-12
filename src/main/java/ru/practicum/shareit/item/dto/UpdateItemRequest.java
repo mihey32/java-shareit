@@ -7,14 +7,14 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(of = {"id"})
 public class UpdateItemRequest {
-    Long id;
-    String name;
-    String description;
-    Boolean available;
+    private Long id;
+    private String name;
+    private String description;
+    private Boolean available;
     @Positive(message = "ID владельца вещи не может быть отрицательным числом")
-    Long ownerId;
+    private Long ownerId;
     @Positive(message = "ID запроса на создание вещи не может быть отрицательным числом")
-    Long requestId;
+    private Long requestId;
 
     public boolean hasName() {
 
