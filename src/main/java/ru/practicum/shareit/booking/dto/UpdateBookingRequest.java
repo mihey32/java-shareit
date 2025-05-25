@@ -8,11 +8,19 @@ import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(of = {"id"})
-public class BookingDto {
+public class UpdateBookingRequest {
     private Long id;
     private LocalDateTime start;
     private LocalDateTime end;
     private Long itemId;
     private Statuses status;
     private Long bookerId;
+
+    public boolean hasStart() {
+        return start != null;
+    }
+
+    public boolean hasEnd() {
+        return end != null;
+    }
 }

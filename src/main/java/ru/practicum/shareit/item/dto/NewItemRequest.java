@@ -1,18 +1,20 @@
-package ru.practicum.shareit.item.model;
+package ru.practicum.shareit.item.dto;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(of = {"id"})
-public class Item {
+public class NewItemRequest {
     private Long id;
-    @NotBlank(message = "Название не должно быть пустым")
+    @NotBlank(message = "Название вещи не должно быть пустым")
     private String name;
-    @NotBlank(message = "Описание не должно быть пустым")
+    @NotBlank(message = "Описание вещи не должно быть пустым")
     private String description;
-    @NotNull(message = "Статус должен быть указан")
+    @NotNull(message = "Статус вещи не может быть пустым.")
     private Boolean available;
     @Positive(message = "ID владельца вещи не может быть отрицательным числом")
     private Long ownerId;
