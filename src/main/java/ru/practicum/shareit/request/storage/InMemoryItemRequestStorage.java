@@ -16,7 +16,6 @@ public class InMemoryItemRequestStorage implements ItemRequestStorage {
     @Override
     public ItemRequest create(ItemRequest request) {
         request.setId(getNextId());
-        //log.trace("Данные о запросе с ID {} сохранены!", request.getId());
         itemRequests.put(request.getId(), request);
         return request;
     }

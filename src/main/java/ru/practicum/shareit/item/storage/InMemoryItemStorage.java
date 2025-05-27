@@ -16,7 +16,6 @@ public class InMemoryItemStorage implements ItemStorage {
     @Override
     public Item create(Item item) {
         item.setId(getNextId());
-        //log.trace("Данные о вещи c ID {} сохранены!", item.getName());
         items.put(item.getId(), item);
         return item;
     }
@@ -39,7 +38,7 @@ public class InMemoryItemStorage implements ItemStorage {
     public Collection<Item> getItems(Long ownerId) {
         return items.values()
                 .stream()
-                .filter(item -> item.getOwnerId().equals(ownerId))
+                .filter(item -> item.getUser().getId().equals(ownerId))
                 .toList();
     }
 

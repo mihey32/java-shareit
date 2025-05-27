@@ -3,22 +3,23 @@ package ru.practicum.shareit.request;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.request.dto.NewRequest;
 import ru.practicum.shareit.request.dto.UpdateRequest;
+import ru.practicum.shareit.user.User;
 
 public class ItemRequestMapper {
     public static ItemRequestDto mapToItemRequestDto(ItemRequest itemRequest) {
         ItemRequestDto dto = new ItemRequestDto();
         dto.setId(itemRequest.getId());
         dto.setDescription(itemRequest.getDescription());
-        dto.setRequestorId(itemRequest.getRequestorId());
+        dto.setRequestorId(itemRequest.getRequestor().getId());
         dto.setCreated(itemRequest.getCreated());
 
         return dto;
     }
 
-    public static ItemRequest mapToItemRequest(NewRequest request) {
+    public static ItemRequest mapToItemRequest(NewRequest request, User findUser) {
         ItemRequest itemRequest = new ItemRequest();
         itemRequest.setDescription(request.getDescription());
-        itemRequest.setRequestorId(request.getRequestorId());
+        itemRequest.setRequestor(findUser);
         itemRequest.setCreated(request.getCreated());
 
         return itemRequest;

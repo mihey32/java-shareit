@@ -16,7 +16,6 @@ public class InMemoryUserStorage implements UserStorage {
 
     @Override
     public User updateUser(User updateUser) {
-        //log.trace("Данные пользователя {} обновлены!", newUser.getName());
         users.put(updateUser.getId(), updateUser);
         return updateUser;
     }
@@ -24,7 +23,6 @@ public class InMemoryUserStorage implements UserStorage {
     @Override
     public User createUser(User newUser) {
         newUser.setId(getNextId());
-        //log.trace("Данные пользователя c ID {} сохранены!", user.getName());
         users.put(newUser.getId(), newUser);
         return newUser;
     }
