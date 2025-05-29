@@ -1,15 +1,15 @@
 package ru.practicum.shareit.item.comment;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.User;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@ToString
 @EqualsAndHashCode(of = {"id"})
 @Entity
 @Table(name = "comments")
