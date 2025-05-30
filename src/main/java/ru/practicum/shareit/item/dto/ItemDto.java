@@ -9,7 +9,7 @@ public class ItemDto {
     private Long id;
     private String name;
     private String description;
-    private Boolean available = Boolean.FALSE;
+    private Boolean available;
     private Long ownerId;
     private Long requestId;
 }
