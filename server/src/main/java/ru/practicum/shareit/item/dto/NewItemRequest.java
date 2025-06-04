@@ -21,6 +21,7 @@ public class NewItemRequest {
     private Long ownerId;
     @Positive(message = "ID запроса на создание вещи не может быть отрицательным числом")
     private Long requestId;
+
     public boolean hasRequestId() {
         return requestId != null;
     }
