@@ -5,23 +5,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.practicum.shareit.exception.ValidationException;
-import ru.practicum.shareit.request.dto.UpdateRequest;
+import ru.practicum.shareit.request.dto.NewRequest;
 import ru.practicum.shareit.request.repository.RequestRepository;
 import ru.practicum.shareit.request.service.ItemRequestServiceImpl;
 import ru.practicum.shareit.user.User;
-import ru.practicum.shareit.user.dto.NewUserRequest;
-import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.repository.UserRepository;
-import ru.practicum.shareit.user.service.UserServiceImpl;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
@@ -29,36 +24,27 @@ import static org.mockito.Mockito.when;
 class ItemRequestServiceTest {
     @Mock
     private RequestRepository requestRepository;
-
     @Mock
     private UserRepository userRepository;
-
     @InjectMocks
     private ItemRequestServiceImpl itemRequestService;
 
-    @InjectMocks
-    private UserServiceImpl userService;
-
     @Test
-    void testUpdateUserWhenUserWithSameEmail() {
-        UpdateRequest updItemRequest = new UpdateRequest(1L, "description1", 1L,
-                LocalDateTime.of(2023, 7, 3, 19, 30, 1));
+    void createRequest_shouldSuccessfullyCreateRequest() {
+        Long userId = 1L;
+        NewRequest newRequest = new NewRequest("Description", userId);
 
-        NewUserRequest newUser = new NewUserRequest("john.doe@mail.com", "John Doe");
+        User user = new User(userId, "john.doe@mail.com", "John Doe");
+        ItemRequest savedRequest = new ItemRequest(1L, "Description", user, LocalDateTime.now());
 
-        when(userRepository.findByEmail(newUser.getEmail())).thenReturn(Optional.empty());
-        when(userRepository.save(any())).thenReturn(new User(1L, "john.doe@mail.com", "John Doe"));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+        when(requestRepository.save(any(ItemRequest.class))).thenReturn(savedRequest);
 
-        UserDto userDto = userService.create(newUser);
+        var result = itemRequestService.create(userId, newRequest);
 
-        when(userRepository.findById(anyLong())).thenReturn(Optional.of(new User(1L, "john.doe@mail.com", "John Doe")));
+        assertNotNull(result);
 
-        updItemRequest.setId(null);
-
-        ValidationException thrown = assertThrows(ValidationException.class, () -> {
-            itemRequestService.update(1L, updItemRequest);
-        });
-
-        assertEquals("ID запроса должен быть указан", thrown.getMessage());
+        verify(userRepository).findById(userId);
+        verify(requestRepository).save(any(ItemRequest.class));
     }
 }

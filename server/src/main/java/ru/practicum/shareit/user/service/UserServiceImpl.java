@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.exception.DuplicatedDataException;
 import ru.practicum.shareit.exception.NotFoundException;
-import ru.practicum.shareit.exception.ValidationException;
 import ru.practicum.shareit.user.User;
 import ru.practicum.shareit.user.UserMapper;
 import ru.practicum.shareit.user.dto.NewUserRequest;
@@ -63,10 +62,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto update(Long userId, UpdateUserRequest request) {
-
-        if (userId == null) {
-            throw new ValidationException("ID пользователя должен быть указан");
-        }
 
         Optional<User> findUser = repository.findByEmail(request.getEmail());
 

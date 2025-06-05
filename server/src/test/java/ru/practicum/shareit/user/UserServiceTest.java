@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.practicum.shareit.exception.DuplicatedDataException;
 import ru.practicum.shareit.exception.NotFoundException;
-import ru.practicum.shareit.exception.ValidationException;
 import ru.practicum.shareit.user.dto.NewUserRequest;
 import ru.practicum.shareit.user.dto.UpdateUserRequest;
 import ru.practicum.shareit.user.repository.UserRepository;
@@ -59,16 +58,5 @@ class UserServiceTest {
         });
 
         assertEquals(String.format("Этот E-mail " + newUser.getEmail() + " уже используется"), thrown.getMessage());
-    }
-
-    @Test
-    void testUpdateUserWhenUserIdIsNull() {
-        UpdateUserRequest newUser = new UpdateUserRequest(1L, "john.doe@mail.com", "John Doe");
-
-        ValidationException thrown = assertThrows(ValidationException.class, () -> {
-            userService.update(null, newUser);
-        });
-
-        assertEquals("ID пользователя должен быть указан", thrown.getMessage());
     }
 }

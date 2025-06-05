@@ -9,6 +9,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import ru.practicum.shareit.client.BaseClient;
+import ru.practicum.shareit.exception.ValidationException;
 import ru.practicum.shareit.item.comment.dto.NewCommentRequest;
 import ru.practicum.shareit.item.dto.NewItemRequest;
 import ru.practicum.shareit.item.dto.UpdateItemRequest;
@@ -53,6 +54,10 @@ public class ItemClient extends BaseClient {
     }
 
     public ResponseEntity<Object> updateItem(Long itemId, Long userId, UpdateItemRequest requestDto) {
+        if (requestDto.getId() == null) {
+            throw new ValidationException("ID запроса должен быть указан");
+        }
+
         return patch("/" + itemId, userId, null, requestDto);
     }
 

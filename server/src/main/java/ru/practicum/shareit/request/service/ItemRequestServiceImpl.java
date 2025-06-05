@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.exception.NotFoundException;
-import ru.practicum.shareit.exception.ValidationException;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.request.ItemRequest;
@@ -63,10 +62,6 @@ public class ItemRequestServiceImpl implements ItemRequestService {
     @Transactional
     public ItemRequestDto update(Long userId, UpdateRequest updateRequest) {
         User findUser = findUserById(userId);
-
-        if (updateRequest.getId() == null) {
-            throw new ValidationException("ID запроса должен быть указан");
-        }
 
         ItemRequest updatedItem = ItemRequestMapper.updateItemFields(findById(updateRequest.getId()), updateRequest, findUser);
         updatedItem = repository.save(updatedItem);

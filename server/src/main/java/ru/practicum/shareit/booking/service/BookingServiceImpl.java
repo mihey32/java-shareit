@@ -74,10 +74,6 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public BookingDto update(Long userId, UpdateBookingRequest updateRequest) {
 
-        if (updateRequest.getId() == null) {
-            throw new ValidationException("ID бронирования должен быть указан");
-        }
-
         User owner = findUserById(userId);
         Booking findBooking = findById(updateRequest.getId());
 

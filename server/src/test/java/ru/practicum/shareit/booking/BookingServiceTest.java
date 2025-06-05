@@ -170,19 +170,6 @@ class BookingServiceTest {
     }
 
     @Test
-    void testUpdateBookingWithWrongId() {
-        UpdateBookingRequest updBooking = new UpdateBookingRequest(1L, LocalDateTime.of(2026, 7, 1, 19, 30, 15),
-                LocalDateTime.of(2026, 7, 2, 19, 30, 15), 1L, Statuses.REJECTED, 1L);
-        updBooking.setId(null);
-
-        ValidationException thrown = assertThrows(ValidationException.class, () -> {
-            bookingService.update(1L, updBooking);
-        });
-
-        assertEquals("ID бронирования должен быть указан", thrown.getMessage());
-    }
-
-    @Test
     void testUpdateBookingWithWrongBookerOrOwner() {
         // user 1
         NewUserRequest newUser1 = new NewUserRequest("john.doe@mail.com", "John Doe");

@@ -49,7 +49,7 @@ public class BookingController {
 
     @PutMapping
     public ResponseEntity<Object> updateBooking(@RequestHeader("X-Sharer-User-Id") Long userId,
-                                                @RequestBody UpdateBookingRequest newBooking) {
+                                                @Valid @RequestBody UpdateBookingRequest newBooking) {
         return bookingClient.updateBooking(userId, newBooking);
     }
 

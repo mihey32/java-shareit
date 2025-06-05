@@ -12,6 +12,7 @@ import ru.practicum.shareit.booking.dto.NewBookingRequest;
 import ru.practicum.shareit.booking.dto.UpdateBookingRequest;
 import ru.practicum.shareit.client.BaseClient;
 import ru.practicum.shareit.enums.States;
+import ru.practicum.shareit.exception.ValidationException;
 
 import java.util.Map;
 
@@ -28,6 +29,8 @@ public class BookingClient extends BaseClient {
     }
 
     public ResponseEntity<Object> bookItem(Long userId, NewBookingRequest requestDto) {
+
+
         return post("", userId, requestDto);
     }
 
@@ -47,6 +50,10 @@ public class BookingClient extends BaseClient {
     }
 
     public ResponseEntity<Object> updateBooking(Long userId, UpdateBookingRequest requestDto) {
+        if (requestDto.getId() == null) {
+            throw new ValidationException("ID бронирования должен быть указан");
+        }
+
         return put("", userId, null, requestDto);
     }
 
